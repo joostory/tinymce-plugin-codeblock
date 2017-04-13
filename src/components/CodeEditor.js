@@ -5,6 +5,9 @@ import 'codemirror/mode/css/css'
 import 'codemirror/mode/htmlmixed/htmlmixed'
 import CodeMirror from 'codemirror/lib/codemirror'
 
+import 'codemirror/lib/codemirror.css'
+import './CodeEditor.css'
+
 class CodeEditor {
   constructor(tinymceEditor) {
     this.tinymceEditor = tinymceEditor
@@ -17,7 +20,11 @@ class CodeEditor {
 
   handleOpenWindow(obj) {
     console.log('openWindow', obj.win)
-    this.textarea = obj.win.$el.find('textarea')
+    this.textarea = obj.win.$el.find('textarea')[0]
+    this.code = CodeMirror.fromTextArea(this.textarea, {
+      lineNumbers: true
+    })
+    console.log('codemirror', this.code)
   }
 
   open() {
