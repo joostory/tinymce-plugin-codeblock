@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import 'codemirror/mode/xml/xml'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/mode/css/css'
@@ -9,66 +8,29 @@ import 'codemirror/lib/codemirror.css'
 import './CodeEditor.css'
 
 class CodeEditor {
-  constructor(tinymceEditor) {
+  constructor(tinymceEditor, textarea) {
     this.tinymceEditor = tinymceEditor
-  }
-
-  handleCloseWindow(obj) {
-    console.log('closeWindow', obj.win)
-    this.textarea = null
-  }
-
-  handleOpenWindow(obj) {
-    console.log('openWindow', obj.win)
-    this.textarea = obj.win.$el.find('textarea')[0]
-    this.code = CodeMirror.fromTextArea(this.textarea, {
-      lineNumbers: true
+    this.textarea = textarea
+    this.codeMirror = CodeMirror.fromTextArea(textarea, {
+      lineNumbers: true,
+      autofocus: true,
+      theme: 'default'
     })
-    console.log('codemirror', this.code)
   }
 
-  open() {
-    const editor = this.tinymceEditor
-    const windowManager = editor.windowManager
-    const DOM = tinymce.dom.DOMUtils.DOM
-
-    editor.on('CloseWindow', this.handleCloseWindow.bind(this))
-
-    editor.on('OpenWindow', this.handleOpenWindow.bind(this))
-
-    windowManager.open({
-      title: 'Code Editor',
-      layout: 'flex',
-      minWidth: Math.min(DOM.getViewPort().w, editor.getParam('codesample_dialog_width', 800)),
-      minHeight: Math.min(DOM.getViewPort().h, editor.getParam('codesample_dialog_height', 650)),
-      direction: 'column',
-      align: 'stretch',
-      body: [
-        {
-          type: 'textbox',
-          name: 'code',
-          multiline: true,
-          spellcheck: false,
-          ariaLabel: 'Code view',
-          flex: 1,
-          style: 'direction: ltr; text-align: left',
-          classes: 'monospace',
-          value: this.getCurrentCode(),
-          autofocus: true
-        }
-      ],
-      onsubmit: this.insertCodeBlock.bind(this)
-    });
+  refresh() {
+    this.codeMirror.refresh()
+    this.codeMirror.setValue(this.getCurrentCode())
   }
 
-  insertCodeBlock(e) {
+  insertCodeBlock() {
     const editor = this.tinymceEditor
-    let code = e.data.code
+    let code = this.codeMirror.getValue()
 
-    editor.undoManager.transact(function () {
-      var node = getSelectedCodeSample(editor);
+    editor.undoManager.transact(() => {
+      var node = this.getSelectedCodeBlock();
 
-      code = DOM.encode(code);
+      code = editor.dom.encode(code);
 
       if (node) {
         node.innerHTML = code;

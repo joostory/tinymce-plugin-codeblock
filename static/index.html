@@ -4,13 +4,13 @@
   <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
   <script>
     tinymce.init({
-      selector:'textarea',
-      plugins: 'codeblock',
-      toolbar: 'codeblock'
+      selector:'textarea.editor',
+      plugins: 'codeblock codesample code',
+      toolbar: 'codeblock codesample code'
     });
   </script>
 </head>
 <body>
-  <textarea>Testing codeblock</textarea>
+  <textarea class='editor'>Testing codeblock</textarea>
 </body>
 </html>

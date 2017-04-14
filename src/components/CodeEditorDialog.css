@@ -1,0 +1,14 @@
+.mce-container .code-editor-dialog,
+.code-editor-dialog { position:fixed; top:0; left:0; bottom:0; right:0; display:none; z-index:65000 }
+.code-editor-dialog .shadow { position:fixed; top:0; left:0; bottom:0; right:0; background:rgba(48, 48, 48, 0.7) }
+.code-editor-dialog .dialog { position:absolute; top:50%; left:50%; width:800px; height:650px; margin:-300px 0 0 -400px; background:#fff }
+.code-editor-dialog .header { position:absolute; top:0; left:0; right:0; height:39px; text-align:center; background-color:#f7f7f7; line-height:40px; border-bottom:1px solid #ddd }
+.code-editor-dialog .header .title { font-size:18px; font-weight:bold; }
+.code-editor-dialog .content { position:absolute; top:40px; bottom:40px; left:0; right:0; }
+.code-editor-dialog .content .textarea { width:100%; height:100% }
+.code-editor-dialog .footer { position:absolute; bottom:0; left:0; right:0; height:39px; text-align:center; background-color:#f7f7f7; line-height:40px; border-top:1px solid #ddd }
+.code-editor-dialog .footer .btn { height:30px; padding:0 20px; border: 1px solid #fff; font-size:14px; font-weight:bold; cursor:pointer }
+.code-editor-dialog .footer .btn-submit { color:#fff; background-color:#2d8ac7; border-color:#2d8ac7 }
+.code-editor-dialog .footer .btn-submit:hover { background-color:#257cb6; border-color:#257cb6 }
+.code-editor-dialog .footer .btn-cancel { color:#333; background-color:#fff; border-color:#e3e3e3 }
+.code-editor-dialog .footer .btn-cancel:hover { background-color:#e3e3e3 }
