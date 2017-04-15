@@ -59,9 +59,6 @@ class CodeEditorDialog {
     this.codeEditor = new CodeEditor(this.editor, textarea)
   }
 
-  createFooter() {
-
-  }
 }
 
 export default CodeEditorDialog

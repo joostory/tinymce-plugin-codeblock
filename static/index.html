@@ -2,11 +2,16 @@
 <html>
 <head>
   <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+  <script src="/bundle.js"></script>
   <script>
     tinymce.init({
       selector:'textarea.editor',
-      plugins: 'codeblock codesample code',
-      toolbar: 'codeblock codesample code'
+      height: '500px',
+      plugins: 'codeblock code',
+      toolbar: 'codeblock code',
+      codeblock: {
+        codestyle: "/styles/atom-one-light.css"
+      }
     });
   </script>
 </head>

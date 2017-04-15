@@ -2,6 +2,9 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: './src/index.js',
+  output: {
+    publicPath: "/"
+  },
   module: {
     rules: [
       {
@@ -17,11 +20,5 @@ module.exports = {
         ]
       }
     ]
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: './static/index.html'
-    })
-  ]
+  }
 }

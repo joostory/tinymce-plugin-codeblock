@@ -19,8 +19,10 @@ class CodeEditor {
   }
 
   refresh() {
+    this.selectedNode = null
     this.codeMirror.refresh()
     this.codeMirror.setValue(this.getCurrentCode())
+    this.codeMirror.focus()
   }
 
   insertCodeBlock() {
@@ -28,8 +30,7 @@ class CodeEditor {
     let code = this.codeMirror.getValue()
 
     editor.undoManager.transact(() => {
-      var node = this.getSelectedCodeBlock();
-
+      let node = this.getSelectedCodeBlock()
       code = editor.dom.encode(code);
 
       if (node) {
@@ -52,12 +53,14 @@ class CodeEditor {
   }
 
   getSelectedCodeBlock() {
-    let node = this.tinymceEditor.selection.getNode();
-    if (node && node.nodeName == 'PRE') {
-      return node
+    if (!this.selectedNode) {
+      let node = this.tinymceEditor.selection.getNode();
+      if (node && node.nodeName == 'PRE') {
+        this.selectedNode = node
+      }
     }
 
-    return null
+    return this.selectedNode
   }
 }
 

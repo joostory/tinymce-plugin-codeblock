@@ -1,9 +1,10 @@
 import CodeEditor from './components/CodeEditor'
 import CodeEditorDialog from './components/CodeEditorDialog'
+import highlightjs from 'highlightjs'
 
 const isCodeBlock = (node) => node && node.nodeName == 'PRE'
 
-const plugin = (editor) => {
+const plugin = (editor, pluginUrl) => {
 
   const $ = editor.$
 
@@ -41,9 +42,9 @@ const plugin = (editor) => {
   });
 
   editor.on('SetContent', () => {
-    let unprocessedCodeSamples = $('pre').filter((idx, elm) => { return isCodeBlock(elm) }).filter(function (idx, elm) {
-      return elm.contentEditable !== "false";
-    });
+    let unprocessedCodeSamples = $('pre')
+      .filter((idx, elm) => { return isCodeBlock(elm) })
+      .filter((idx, elm) => { return elm.contentEditable !== "false" });
 
     if (unprocessedCodeSamples.length) {
       editor.undoManager.transact(() => {
@@ -54,10 +55,23 @@ const plugin = (editor) => {
 
           elm.contentEditable = false;
           elm.innerHTML = editor.dom.encode(elm.textContent);
+          highlightjs.highlightBlock(elm)
         });
       });
     }
-  });
+  })
+
+  editor.on('init', () => {
+    if (editor.settings.codeblock && editor.settings.codeblock.codestyle) {
+      let linkElm = editor.dom.create('link', {
+        rel: 'stylesheet',
+        href: editor.settings.codeblock.codestyle
+      });
+
+      editor.getDoc().getElementsByTagName('head')[0].appendChild(linkElm);
+    }
+    
+  })
 };
 
 export default plugin;

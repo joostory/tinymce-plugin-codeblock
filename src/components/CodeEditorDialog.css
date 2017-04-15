@@ -1,7 +1,7 @@
 .mce-container .code-editor-dialog,
 .code-editor-dialog { position:fixed; top:0; left:0; bottom:0; right:0; display:none; z-index:65000 }
 .code-editor-dialog .shadow { position:fixed; top:0; left:0; bottom:0; right:0; background:rgba(48, 48, 48, 0.7) }
-.code-editor-dialog .dialog { position:absolute; top:50%; left:50%; width:800px; height:650px; margin:-300px 0 0 -400px; background:#fff }
+.code-editor-dialog .dialog { position:absolute; top:50px; bottom:50px; left:50%; width:800px; margin:0 0 0 -400px; background:#fff }
 .code-editor-dialog .header { position:absolute; top:0; left:0; right:0; height:39px; text-align:center; background-color:#f7f7f7; line-height:40px; border-bottom:1px solid #ddd }
 .code-editor-dialog .header .title { font-size:18px; font-weight:bold; }
 .code-editor-dialog .content { position:absolute; top:40px; bottom:40px; left:0; right:0; }
