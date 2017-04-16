@@ -40,5 +40,9 @@ module.exports = {
         to: path.join(__dirname, '../dist', pluginName)
       }
     ])
-  ]
+  ],
+  externals: {
+    'highlightjs': 'hljs',
+    'codemirror/lib/codemirror': 'CodeMirror'
+  }
 }

@@ -1,20 +1,16 @@
-import 'codemirror/mode/xml/xml'
-import 'codemirror/mode/javascript/javascript'
-import 'codemirror/mode/css/css'
-import 'codemirror/mode/htmlmixed/htmlmixed'
 import CodeMirror from 'codemirror/lib/codemirror'
-
-import 'codemirror/lib/codemirror.css'
 import './CodeEditor.css'
 
 class CodeEditor {
   constructor(tinymceEditor, textarea) {
+    let theme = tinymceEditor.settings.codeblock && tinymceEditor.settings.codeblock.codeTheme? tinymceEditor.settings.codeblock.codeTheme:'default'
+
     this.tinymceEditor = tinymceEditor
     this.textarea = textarea
     this.codeMirror = CodeMirror.fromTextArea(textarea, {
       lineNumbers: true,
       autofocus: true,
-      theme: 'default'
+      theme: theme
     })
   }
 

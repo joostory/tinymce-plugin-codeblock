@@ -20,5 +20,9 @@ module.exports = {
         ]
       }
     ]
+  },
+  externals: {
+    'highlightjs': 'hljs',
+    'codemirror/lib/codemirror': 'CodeMirror'
   }
 }

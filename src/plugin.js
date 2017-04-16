@@ -62,10 +62,10 @@ const plugin = (editor, pluginUrl) => {
   })
 
   editor.on('init', () => {
-    if (editor.settings.codeblock && editor.settings.codeblock.codestyle) {
+    if (editor.settings.codeblock && editor.settings.codeblock.highlightStyle) {
       let linkElm = editor.dom.create('link', {
         rel: 'stylesheet',
-        href: editor.settings.codeblock.codestyle
+        href: editor.settings.codeblock.highlightStyle
       });
 
       editor.getDoc().getElementsByTagName('head')[0].appendChild(linkElm);

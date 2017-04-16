@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script src="//cdn.jsdelivr.net/highlight.js/9.10.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/css/css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/htmlmixed/htmlmixed.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/theme/material.min.css">
+  
   <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
   <script src="/bundle.js"></script>
   <script>
@@ -10,7 +20,8 @@
       plugins: 'codeblock code',
       toolbar: 'codeblock code',
       codeblock: {
-        codestyle: "/styles/atom-one-light.css"
+        highlightStyle: "https://cdn.jsdelivr.net/highlight.js/9.10.0/styles/atom-one-light.min.css",
+        codeTheme: 'material'
       }
     });
   </script>
