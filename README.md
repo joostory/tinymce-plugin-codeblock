@@ -8,8 +8,9 @@ By running the `npm start` command you start the development server and open a b
 
 ## The production build
 
-By running the `npm run build` command Webpack will create a `dist` directory with a child directory with the name of your plugin (codeblock) containing three files:
+By running the `npm run build` command Webpack will create a `dist` directory with a child directory with the name of your plugin (codeblock) containing four files:
 
 * `plugin.js` - the bundled plugin
 * `plugin.min.js` - the bundles, uglified and minified plugin
-* `LICENSE` - a file explaining the license of your plugin (copied over from `src/LICENSE`) 
+* `codeblock.css` - codeblock dialog style (copied over from `static/codeblock.css`)
+* `LICENSE` - a file explaining the license of your plugin (copied over from `LICENSE`) 

@@ -1,29 +1,40 @@
 import CodeEditor from './CodeEditor'
-import './CodeEditorDialog.css'
 
 class CodeEditorDialog {
   constructor(editor) {
     this.editor = editor
+    this.active = false
   }
 
   open() {
+    if (this.active) {
+      return
+    }
+
     if (!this.container) {
       this.createContainer()
     }
 
     this.container.style.display = 'block'
     this.codeEditor.refresh()
+    this.active = true
   }
 
   close() {
+    if (!this.active) {
+      return
+    }
+
     this.container.style.display = 'none'
+    this.active = false
   }
 
   createContainer() {
     const { $, dom } = this.editor
     let container = dom.create('div', { class: 'code-editor-dialog' })
     
-    container.append(dom.create('div', { class: 'shadow' }))
+    let shadow = dom.create('div', { class: 'shadow' })
+    container.append(shadow)
 
     let dialog = dom.create('div', { class: 'dialog' })
     container.append(dialog)
@@ -41,7 +52,18 @@ class CodeEditorDialog {
     footer.append(btnSubmit)
     footer.append(btnCancel)
 
+    dialog.append(header)
+    dialog.append(content)
+    dialog.append(footer)
+    
+    document.body.append(container)
+    this.container = container
+    this.codeEditor = new CodeEditor(this.editor, textarea)
+
     $(btnSubmit).on('click', e => {
+      if (!this.active) {
+        return
+      }
       this.codeEditor.insertCodeBlock()
       this.close()
     })
@@ -50,13 +72,19 @@ class CodeEditorDialog {
       this.close()
     })
 
-    dialog.append(header)
-    dialog.append(content)
-    dialog.append(footer)
-    
-    document.body.append(container)
-    this.container = container
-    this.codeEditor = new CodeEditor(this.editor, textarea)
+    $(shadow).on('click', e => {
+      this.close()
+    })
+
+    $(window).on("keyup", e => {
+      if (!this.active) {
+        return
+      }
+      if (e.keyCode == 27 && confirm('Close CodeBlock?')) {
+        this.close()
+      }
+    })
+
   }
 
 }

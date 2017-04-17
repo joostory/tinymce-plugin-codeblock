@@ -19,13 +19,6 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: 'babel-loader'
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
       }
     ]
   },
@@ -36,7 +29,11 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       {
-        from: path.join(__dirname, '../src/LICENSE'),
+        from: path.join(__dirname, '../LICENSE'),
+        to: path.join(__dirname, '../dist', pluginName)
+      },
+      {
+        from: path.join(__dirname, '../static/codeblock.css'),
         to: path.join(__dirname, '../dist', pluginName)
       }
     ])

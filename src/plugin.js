@@ -55,7 +55,9 @@ const plugin = (editor, pluginUrl) => {
 
           elm.contentEditable = false;
           elm.innerHTML = editor.dom.encode(elm.textContent);
-          highlightjs.highlightBlock(elm)
+          if (highlightjs && highlightjs.highlightBlock) {
+            highlightjs.highlightBlock(elm)
+          }
         });
       });
     }

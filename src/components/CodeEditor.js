@@ -1,5 +1,4 @@
 import CodeMirror from 'codemirror/lib/codemirror'
-import './CodeEditor.css'
 
 class CodeEditor {
   constructor(tinymceEditor, textarea) {
@@ -7,23 +6,30 @@ class CodeEditor {
 
     this.tinymceEditor = tinymceEditor
     this.textarea = textarea
-    this.codeMirror = CodeMirror.fromTextArea(textarea, {
-      lineNumbers: true,
-      autofocus: true,
-      theme: theme
-    })
+    if (CodeMirror && CodeMirror.fromTextArea) {
+      this.codeMirror = CodeMirror.fromTextArea(textarea, {
+        lineNumbers: true,
+        autofocus: true,
+        theme: theme
+      })
+    }
   }
 
   refresh() {
     this.selectedNode = null
-    this.codeMirror.refresh()
-    this.codeMirror.setValue(this.getCurrentCode())
-    this.codeMirror.focus()
+    if (this.codeMirror) {
+      this.codeMirror.refresh()
+      this.codeMirror.setValue(this.getCurrentCode())
+      this.codeMirror.focus()
+    } else {
+      this.textarea.value = this.getCurrentCode()
+      this.textarea.focus()
+    }
   }
 
   insertCodeBlock() {
     const editor = this.tinymceEditor
-    let code = this.codeMirror.getValue()
+    let code = this.getValue()
 
     editor.undoManager.transact(() => {
       let node = this.getSelectedCodeBlock()
@@ -37,6 +43,10 @@ class CodeEditor {
         editor.selection.select(editor.$('#__new').removeAttr('id')[0]);
       }
     });
+  }
+
+  getValue() {
+    return this.codeMirror? this.codeMirror.getValue() : this.textarea.value
   }
 
   getCurrentCode() {

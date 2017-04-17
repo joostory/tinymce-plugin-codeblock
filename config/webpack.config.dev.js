@@ -11,18 +11,11 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: 'babel-loader'
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
       }
     ]
   },
   externals: {
-    'highlightjs': 'hljs',
-    'codemirror/lib/codemirror': 'CodeMirror'
+    'highlightjs': '(typeof hljs !== "undefined")? hljs:{}',
+    'codemirror/lib/codemirror': '(typeof CodeMirror !== "undefined")? CodeMirror:{}'
   }
 }
