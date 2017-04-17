@@ -14,3 +14,16 @@ By running the `npm run build` command Webpack will create a `dist` directory wi
 * `plugin.min.js` - the bundles, uglified and minified plugin
 * `codeblock.css` - codeblock dialog style (copied over from `static/codeblock.css`)
 * `LICENSE` - a file explaining the license of your plugin (copied over from `LICENSE`) 
+
+## use
+
+```
+tinymce.init({
+  plugins: 'codeblock code',
+  toolbar: 'codeblock code',
+  codeblock: {
+    highlightStyle: "https://cdn.jsdelivr.net/highlight.js/9.10.0/styles/default.min.css", // highlight.js style
+    codeTheme: 'default' // codemirror theme
+  }
+});
+```
