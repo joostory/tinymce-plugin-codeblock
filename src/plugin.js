@@ -35,7 +35,7 @@ const plugin = (editor, pluginUrl) => {
 
       $elm.removeAttr('contentEditable');
 
-      $elm.empty().append($('<code></code>').each((idx, elm) => {
+      $elm.empty().removeAttr('class').append($('<code></code>').each((idx, elm) => {
         elm.textContent = code;
       }));
     });
