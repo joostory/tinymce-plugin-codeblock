@@ -60,7 +60,7 @@ class CodeEditorDialog {
     this.container = container
     this.codeEditor = new CodeEditor(this.editor, textarea)
 
-    $(btnSubmit).on('click', e => {
+    $(btnSubmit).on('click', () => {
       if (!this.active) {
         return
       }
@@ -68,15 +68,15 @@ class CodeEditorDialog {
       this.close()
     })
 
-    $(btnCancel).on('click', e => {
+    $(btnCancel).on('click', () => {
       this.close()
     })
 
-    $(shadow).on('click', e => {
+    $(shadow).on('click', () => {
       this.close()
     })
 
-    $(window).on("keyup", e => {
+    $(window).on("keyup", (e) => {
       if (!this.active) {
         return
       }

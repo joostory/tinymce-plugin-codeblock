@@ -2,7 +2,7 @@ import CodeMirror from 'codemirror/lib/codemirror'
 
 class CodeEditor {
   constructor(tinymceEditor, textarea) {
-    let theme = tinymceEditor.settings.codeblock && tinymceEditor.settings.codeblock.codeTheme? tinymceEditor.settings.codeblock.codeTheme:'default'
+    let theme = tinymceEditor.settings.codeblock && tinymceEditor.settings.codeblock.codeTheme ? tinymceEditor.settings.codeblock.codeTheme : 'default'
 
     this.tinymceEditor = tinymceEditor
     this.textarea = textarea
@@ -46,7 +46,7 @@ class CodeEditor {
   }
 
   getValue() {
-    return this.codeMirror? this.codeMirror.getValue() : this.textarea.value
+    return this.codeMirror ? this.codeMirror.getValue() : this.textarea.value
   }
 
   getCurrentCode() {
