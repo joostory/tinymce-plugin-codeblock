@@ -14,7 +14,7 @@ module.exports = {
   output: process.env.NODE_ENV !== "production" ? {
 		publicPath: '/'
 	} : {
-    path: path.join(__dirname, '../dist', pluginName),
+    path: path.join(__dirname, './dist', pluginName),
     filename: '[name].js'
   },
   module: {
