@@ -1,4 +1,4 @@
-# codeblock TinyMCE Plugin
+# CodeBlock TinyMCE Plugin
 
 Welcome stranger! This is a repo containing the codeblock TinyMCE plugin.
 
@@ -12,10 +12,9 @@ By running the `npm run build` command Webpack will create a `dist` directory wi
 
 * `plugin.js` - the bundled plugin
 * `plugin.min.js` - the bundles, uglified and minified plugin
-* `codeblock.css` - codeblock dialog style (copied over from `static/codeblock.css`)
 * `LICENSE` - a file explaining the license of your plugin (copied over from `LICENSE`) 
 
-## use
+## Use
 
 ```
 tinymce.init({
@@ -27,3 +26,8 @@ tinymce.init({
   }
 });
 ```
+
+## Options
+
+- highlightStyle: optional, [highlight.js](https://highlightjs.org) style url
+- codeTheme: optional, default value - 'default'

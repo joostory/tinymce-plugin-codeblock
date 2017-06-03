@@ -1,7 +1,7 @@
 {
-  "name": "codeblock",
+  "name": "tinymce-plugin-codeblock",
   "version": "1.0.0",
-  "description": "codeblock TinyMCE plugin",
+  "description": "CodeBlock TinyMCE plugin",
   "scripts": {
     "start": "NODE_ENV=development webpack-dev-server --progress --inline --content-base static",
     "lint": "eslint 'src/**/*.js'",

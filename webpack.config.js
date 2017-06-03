@@ -42,10 +42,6 @@ module.exports = {
       {
         from: path.join(__dirname, '../LICENSE'),
         to: path.join(__dirname, '../dist', pluginName)
-      },
-      {
-        from: path.join(__dirname, '../static/codeblock.css'),
-        to: path.join(__dirname, '../dist', pluginName)
       }
     ])
   ],
