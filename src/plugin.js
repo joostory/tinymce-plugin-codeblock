@@ -2,6 +2,8 @@ import CodeEditor from './components/CodeEditor'
 import CodeEditorDialog from './components/CodeEditorDialog'
 import highlightjs from 'highlightjs'
 
+import './styles/codeblock.css'
+
 const isCodeBlock = (node) => node && node.nodeName == 'PRE'
 
 const plugin = (editor, pluginUrl) => {
@@ -17,13 +19,14 @@ const plugin = (editor, pluginUrl) => {
     } else {
       editor.formatter.toggle('code');
     }
-
   }
 
   editor.addCommand('codeblock', handleButtonClick)
   editor.addButton('codeblock', {
     cmd: 'codeblock',
-    icon: 'codesample'
+    icon: 'codesample',
+    tooltip: 'Insert Code Block',
+    stateSelector: 'pre'
   });
 
   editor.on('PreProcess', (e) => {
