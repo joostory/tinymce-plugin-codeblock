@@ -1,15 +1,15 @@
-.code-editor-dialog { position:fixed; top:0; left:0; bottom:0; right:0; display:none; z-index:65000 }
-.code-editor-dialog .shadow { position:fixed; top:0; left:0; bottom:0; right:0; background:rgba(48, 48, 48, 0.7) }
-.code-editor-dialog .dialog { position:absolute; top:50px; bottom:50px; left:50px; right:50px; background:#fff }
-.code-editor-dialog .header { position:absolute; top:0; left:0; right:0; height:39px; text-align:center; background-color:#f7f7f7; line-height:38px; border-bottom:1px solid #ddd }
-.code-editor-dialog .header .title { font-size:16px; font-weight:bold; }
-.code-editor-dialog .content { position:absolute; top:40px; bottom:40px; left:0; right:0; }
-.code-editor-dialog .content .textarea { width:100%; height:100%; resize:none; border:0; padding:0 }
-.code-editor-dialog .footer { position:absolute; bottom:0; left:0; right:0; height:39px; text-align:center; background-color:#f7f7f7; line-height:38px; border-top:1px solid #ddd }
-.code-editor-dialog .footer .btn { height:30px; padding:0 20px; border: 1px solid #fff; font-size:13px; font-weight:bold; cursor:pointer; line-height:28px }
-.code-editor-dialog .footer .btn-submit { color:#fff; background-color:#2d8ac7; border-color:#2d8ac7; margin-right:5px }
-.code-editor-dialog .footer .btn-submit:hover { background-color:#257cb6; border-color:#257cb6 }
-.code-editor-dialog .footer .btn-cancel { color:#333; background-color:#fff; border-color:#e3e3e3 }
-.code-editor-dialog .footer .btn-cancel:hover { background-color:#e3e3e3 }
+.mce-codeblock-dialog-container { position:fixed; top:0; left:0; bottom:0; right:0; display:none; z-index:65000 }
+.mce-codeblock-dialog-container .mce-codeblock-shadow { position:fixed; top:0; left:0; bottom:0; right:0; background:rgba(48, 48, 48, 0.7) }
+.mce-codeblock-dialog-container .mce-codeblock-dialog { position:absolute; top:50px; bottom:50px; left:50px; right:50px; background:#fff }
+.mce-codeblock-dialog-container .mce-codeblock-header { position:absolute; top:0; left:0; right:0; height:39px; text-align:center; background-color:#f7f7f7; line-height:38px; border-bottom:1px solid #ddd }
+.mce-codeblock-dialog-container .mce-codeblock-header .mce-codeblock-title { font-size:16px; font-weight:bold; }
+.mce-codeblock-dialog-container .mce-codeblock-content { position:absolute; top:40px; bottom:40px; left:0; right:0; }
+.mce-codeblock-dialog-container .mce-codeblock-content .textarea { width:100%; height:100%; resize:none; border:0; padding:0 }
+.mce-codeblock-dialog-container .mce-codeblock-footer { position:absolute; bottom:0; left:0; right:0; height:39px; text-align:center; background-color:#f7f7f7; line-height:38px; border-top:1px solid #ddd }
+.mce-codeblock-dialog-container .mce-codeblock-footer .mce-codeblock-btn { height:30px; padding:0 20px; border: 1px solid #fff; font-size:13px; font-weight:bold; cursor:pointer; line-height:28px }
+.mce-codeblock-dialog-container .mce-codeblock-footer .mce-codeblock-btn-submit { color:#fff; background-color:#2d8ac7; border-color:#2d8ac7; margin-right:5px }
+.mce-codeblock-dialog-container .mce-codeblock-footer .mce-codeblock-btn-submit:hover { background-color:#257cb6; border-color:#257cb6 }
+.mce-codeblock-dialog-container .mce-codeblock-footer .mce-codeblock-btn-cancel { color:#333; background-color:#fff; border-color:#e3e3e3 }
+.mce-codeblock-dialog-container .mce-codeblock-footer .mce-codeblock-btn-cancel:hover { background-color:#e3e3e3 }
 
-.CodeMirror { height:100%; width:100%; font-size:13px }
+.mce-codeblock-dialog-container .CodeMirror { height:100%; width:100%; font-size:13px }
