@@ -17,7 +17,7 @@
       selector:'textarea.editor',
       height: '500px',
       plugins: 'codeblock code',
-      toolbar: 'codeblock code',
+      toolbar: 'codeblock inlinecode code',
       codeblock: {
         highlightStyle: "https://cdn.jsdelivr.net/highlight.js/9.10.0/styles/default.min.css",
         codeTheme: 'default'
@@ -27,7 +27,7 @@
 </head>
 <body>
   <textarea class='editor'>
-    <p>Testing codeblock</p>
+    <p>Testing <code>codeblock</code></p>
     <pre><code>echo "Hello, world!"</code></pre>
   </textarea>
 </body>

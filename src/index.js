@@ -1,3 +1,3 @@
-import plugin from './plugin';
+import plugin from './plugin'
 
-tinymce.PluginManager.add('codeblock', plugin);
+tinymce.PluginManager.add('codeblock', plugin)
