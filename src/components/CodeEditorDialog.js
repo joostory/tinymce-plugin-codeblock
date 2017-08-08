@@ -1,4 +1,5 @@
 import CodeEditor from './CodeEditor'
+import autobind from 'autobind-decorator'
 
 class CodeEditorDialog {
   constructor(editor) {
@@ -11,11 +12,13 @@ class CodeEditorDialog {
       return
     }
 
-    if (!this.container) {
+    if (!this.$container) {
       this.createContainer()
     }
 
-    this.container.style.display = 'block'
+    this.$container.show()
+    this.$container.offset()
+    this.$container.addClass('mce-in')
     this.codeEditor.refresh()
     this.active = true
   }
@@ -25,13 +28,21 @@ class CodeEditorDialog {
       return
     }
 
-    this.container.style.display = 'none'
+    this.$container.removeClass('mce-in')
+    this.$container.offset()
+    this.$container.hide()
+    
     this.active = false
+  }
+
+  @autobind
+  handleClose(e) {
+    this.close()
   }
 
   createContainer() {
     const { $, dom } = this.editor
-    let container = dom.create('div', { class: 'mce-codeblock-dialog-container' })
+    let container = dom.create('div', { class: 'mce-codeblock-dialog-container mce-window' })
     
     let shadow = dom.create('div', { class: 'mce-codeblock-shadow' })
     container.append(shadow)
@@ -40,26 +51,36 @@ class CodeEditorDialog {
     container.append(dialog)
     this.dialog = dialog
 
-    let header = dom.create('div', { class: 'mce-codeblock-header' }, '<span class="mce-codeblock-title">CodeBlock</span>')
+    let header = dom.create('div', { class: 'mce-codeblock-header mce-window-head' }, '<span class="mce-codeblock-title mce-title">코드블럭 삽입</span>')
+    let btnClose = dom.create('button', { class: 'mce-close' }, '<i class="mce-ico mce-i-remove"></i>')
+    header.append(btnClose)
     
     let content = dom.create('div', { class: 'mce-codeblock-content' })
     let textarea = dom.create('textarea', { class: 'textarea' })
     content.append(textarea)
 
     let footer = dom.create('div', { class: 'mce-codeblock-footer' })
-    let btnSubmit = dom.create('button', { class: 'mce-codeblock-btn mce-codeblock-btn-submit' }, '확인')
     let btnCancel = dom.create('button', { class: 'mce-codeblock-btn mce-codeblock-btn-cancel' }, '취소')
-    footer.append(btnSubmit)
+    let btnSubmit = dom.create('button', { class: 'mce-codeblock-btn mce-codeblock-btn-submit', disabled:true }, '확인')
     footer.append(btnCancel)
+    footer.append(btnSubmit)
 
     dialog.append(header)
     dialog.append(content)
     dialog.append(footer)
     
     document.body.append(container)
-    this.container = container
+    this.$container = $(container)
+    this.$btnSubmit = $(btnSubmit)
     this.codeEditor = new CodeEditor(this.editor, textarea)
-
+    this.codeEditor.onChange((value) => {
+      if (value && value.length > 0) {
+        this.$btnSubmit.attr('disabled', null)
+      } else {
+        this.$btnSubmit.attr('disabled', true)
+      }
+      
+    })
     $(btnSubmit).on('click', () => {
       if (!this.active) {
         return
@@ -68,22 +89,11 @@ class CodeEditorDialog {
       this.close()
     })
 
-    $(btnCancel).on('click', () => {
-      this.close()
-    })
+    $(btnClose).on('click', this.handleClose)
 
-    $(shadow).on('click', () => {
-      this.close()
-    })
+    $(btnCancel).on('click', this.handleClose)
 
-    $(window).on("keyup", (e) => {
-      if (!this.active) {
-        return
-      }
-      if (e.keyCode == 27 && confirm('Close CodeBlock?')) {
-        this.close()
-      }
-    })
+    $(shadow).on('click', this.handleClose)
 
   }
 

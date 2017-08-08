@@ -1,4 +1,3 @@
-import CodeEditor from './components/CodeEditor'
 import CodeEditorDialog from './components/CodeEditorDialog'
 import highlightjs from 'highlightjs'
 
@@ -25,7 +24,7 @@ export default (editor, pluginUrl) => {
   editor.addButton('codeblock', {
     cmd: 'codeblock',
     icon: 'codesample',
-    tooltip: 'Insert Code Block',
+    tooltip: '코드블럭',
     stateSelector: 'pre'
   })
 
@@ -46,8 +45,8 @@ export default (editor, pluginUrl) => {
 
   editor.on('SetContent', () => {
     let unprocessedCodeSamples = $('pre')
-      .filter((idx, elm) => { return isCodeBlock(elm) })
-      .filter((idx, elm) => { return elm.contentEditable !== "false" })
+      .filter((idx, elm) => isCodeBlock(elm))
+      .filter((idx, elm) => elm.contentEditable !== "false")
 
     if (unprocessedCodeSamples.length) {
       editor.undoManager.transact(() => {

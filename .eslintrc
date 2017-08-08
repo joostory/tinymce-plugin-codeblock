@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "node": true
   },
 
   "parserOptions": {
@@ -64,7 +65,8 @@
     "no-sequences": 2,
     "no-new": 2,
     "no-caller": 2,
-    "no-undef": 0
+    "no-undef": 0,
+    "no-unused-vars":"warn"
   },
 
   "extends": "eslint:recommended"

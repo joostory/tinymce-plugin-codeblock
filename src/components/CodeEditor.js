@@ -68,6 +68,19 @@ class CodeEditor {
 
     return this.selectedNode
   }
+
+  onChange(callback) {
+    if (this.codeMirror) {
+      this.codeMirror.on('change', (doc) => {
+        callback(doc.getValue())
+      })
+    } else {
+      this.textarea.addEventListener("keyup", (e) => {
+        callback(e.target.value)
+      })
+    }
+    
+  }
 }
 
 export default CodeEditor
