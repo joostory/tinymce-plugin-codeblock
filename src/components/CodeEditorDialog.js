@@ -42,7 +42,7 @@ class CodeEditorDialog {
 
   createContainer() {
     const { $, dom } = this.editor
-    let container = dom.create('div', { class: 'mce-codeblock-dialog-container mce-window' })
+    let container = dom.create('div', { class: 'mce-codeblock-dialog-container' })
     
     let shadow = dom.create('div', { class: 'mce-codeblock-shadow' })
     container.append(shadow)
@@ -51,7 +51,7 @@ class CodeEditorDialog {
     container.append(dialog)
     this.dialog = dialog
 
-    let header = dom.create('div', { class: 'mce-codeblock-header mce-window-head' }, '<span class="mce-codeblock-title mce-title">코드블럭 삽입</span>')
+    let header = dom.create('div', { class: 'mce-codeblock-header' }, '<span class="mce-codeblock-title mce-title">코드블럭 삽입</span>')
     let btnClose = dom.create('button', { class: 'mce-close' }, '<i class="mce-ico mce-i-remove"></i>')
     header.append(btnClose)
     

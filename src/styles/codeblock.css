@@ -1,3 +1,33 @@
+.mce-codeblock-dialog-container .mce-codeblock-header {
+  border-bottom: 1px solid #E0E5EE;
+  height: 66px;
+  line-height: 66px
+}
+
+.mce-codeblock-dialog-container .mce-codeblock-header .mce-title {
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: normal;
+  letter-spacing: -1px;
+  margin-left: 40px
+}
+
+.mce-codeblock-dialog-container .mce-codeblock-header .mce-close {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: 0;
+  height: 38px;
+  width: 38px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.mce-codeblock-dialog-container .mce-codeblock-header .mce-close .mce-ico {
+  color: #fff
+}
+
 .mce-codeblock-dialog-container {
   position: fixed;
   top: 0;
@@ -18,29 +48,13 @@
 
 .mce-codeblock-dialog-container .mce-codeblock-dialog {
   position: absolute;
-  width:800px;
+  width: 800px;
   top: 50px;
   bottom: 50px;
   left: 50%;
-  margin-left:-400px;
+  margin-left: -400px;
   background: #fff
 }
-
-/* .mce-codeblock-dialog-container .mce-codeblock-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 39px;
-  text-align: center;
-  background-color: #f7f7f7;
-  line-height: 38px;
-  border-bottom: 1px solid #ddd
-} */
-
- /* .mce-codeblock-dialog-container .mce-codeblock-header .mce-codeblock-title {
-  font-size: 18px;
-} */
 
 .mce-codeblock-dialog-container .mce-codeblock-content {
   position: absolute;
