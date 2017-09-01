@@ -42,34 +42,22 @@ class CodeEditorDialog {
 
   createContainer() {
     const { $, dom } = this.editor
-    let container = dom.create('div', { class: 'mce-codeblock-dialog-container' })
+    let container = dom.add(document.body, 'div', { class: 'mce-codeblock-dialog-container' })
     
-    let shadow = dom.create('div', { class: 'mce-codeblock-shadow' })
-    container.append(shadow)
+    let shadow = dom.add(container, 'div', { class: 'mce-codeblock-shadow' })
 
-    let dialog = dom.create('div', { class: 'mce-codeblock-dialog' })
-    container.append(dialog)
-    this.dialog = dialog
+    let dialog = dom.add(container, 'div', { class: 'mce-codeblock-dialog' })
 
-    let header = dom.create('div', { class: 'mce-codeblock-header' }, '<span class="mce-codeblock-title mce-title">코드블럭 삽입</span>')
-    let btnClose = dom.create('button', { class: 'mce-close' }, '<i class="mce-ico mce-i-remove"></i>')
-    header.append(btnClose)
+    let header = dom.add(dialog, 'div', { class: 'mce-codeblock-header mce-window-head' }, '<span class="mce-codeblock-title mce-title">코드블럭 삽입</span>')
+    let btnClose = dom.add(header, 'button', { class: 'mce-close' }, '<i class="mce-ico mce-i-remove"></i>')
     
-    let content = dom.create('div', { class: 'mce-codeblock-content' })
-    let textarea = dom.create('textarea', { class: 'textarea' })
-    content.append(textarea)
+    let content = dom.add(dialog, 'div', { class: 'mce-codeblock-content' })
+    let textarea = dom.add(content, 'textarea', { class: 'textarea' })
 
-    let footer = dom.create('div', { class: 'mce-codeblock-footer' })
-    let btnCancel = dom.create('button', { class: 'mce-codeblock-btn mce-codeblock-btn-cancel' }, '취소')
-    let btnSubmit = dom.create('button', { class: 'mce-codeblock-btn mce-codeblock-btn-submit', disabled:true }, '확인')
-    footer.append(btnCancel)
-    footer.append(btnSubmit)
+    let footer = dom.add(dialog, 'div', { class: 'mce-codeblock-footer' })
+    let btnCancel = dom.add(footer, 'button', { class: 'mce-codeblock-btn mce-codeblock-btn-cancel' }, '취소')
+    let btnSubmit = dom.add(footer, 'button', { class: 'mce-codeblock-btn mce-codeblock-btn-submit', disabled:true }, '확인')
 
-    dialog.append(header)
-    dialog.append(content)
-    dialog.append(footer)
-    
-    document.body.append(container)
     this.$container = $(container)
     this.$btnSubmit = $(btnSubmit)
     this.codeEditor = new CodeEditor(this.editor, textarea)

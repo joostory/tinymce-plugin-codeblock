@@ -1,7 +1,8 @@
 .mce-codeblock-dialog-container .mce-codeblock-header {
   border-bottom: 1px solid #E0E5EE;
-  height: 66px;
-  line-height: 66px
+  height: 63px;
+  line-height: 63px;
+  padding: 0
 }
 
 .mce-codeblock-dialog-container .mce-codeblock-header .mce-title {
@@ -34,7 +35,8 @@
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: 65000
+  z-index: 65000;
+  background: transparent
 }
 
 .mce-codeblock-dialog-container .mce-codeblock-shadow {
@@ -53,12 +55,15 @@
   bottom: 50px;
   left: 50%;
   margin-left: -400px;
-  background: #fff
+  background: #fff;
+  border-radius: 1px;
+  border: 1px solid #465467;
+  box-shadow:0 4px 8px rgba(0,0,0,0.3)
 }
 
 .mce-codeblock-dialog-container .mce-codeblock-content {
   position: absolute;
-  top: 67px;
+  top: 64px;
   bottom: 57px;
   left: 0;
   right: 0;
@@ -97,6 +102,7 @@
   text-align: center;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
   box-sizing: content-box;
+  font-size: 13px
 }
 
 .mce-codeblock-dialog-container .mce-codeblock-footer .mce-codeblock-btn-cancel:hover {
@@ -111,7 +117,7 @@
 
 .mce-codeblock-dialog-container .mce-codeblock-footer .mce-codeblock-btn-submit {
   margin-left: 4px;
-  margin-right: 40px;
+  margin-right: 30px;
   border: 1px solid #D34D1D;
   color: #fff;
   background: #EC5621;
@@ -141,5 +147,7 @@
 .mce-codeblock-dialog-container .CodeMirror {
   height: 100%;
   width: 100%;
-  font-size: 13px
+  font-size: 13px;
+  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+  letter-spacing: 0
 }
