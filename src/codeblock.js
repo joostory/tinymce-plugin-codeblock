@@ -12,12 +12,7 @@ export default (editor, pluginUrl) => {
   let dialog = new CodeEditorDialog(editor)
   
   const handleButtonClick = () => {
-    var node = editor.selection.getNode()
-    if (editor.selection.isCollapsed() || isCodeBlock(node)) {
-      dialog.open()
-    } else {
-      editor.formatter.toggle('code')
-    }
+    dialog.open()
   }
 
   editor.addCommand('codeblock', handleButtonClick)

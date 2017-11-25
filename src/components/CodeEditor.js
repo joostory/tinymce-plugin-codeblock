@@ -55,7 +55,7 @@ class CodeEditor {
       return node.textContent
     }
 
-    return ''
+    return this.tinymceEditor.selection.getContent({format: 'text'})
   }
 
   getSelectedCodeBlock() {
