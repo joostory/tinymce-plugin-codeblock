@@ -1,4 +1,7 @@
-# CodeBlock TinyMCE Plugin
+# CodeBlock TinyMCE Plugin [![npm][npm-image]][npm-url]
+
+[npm-image]: https://img.shields.io/npm/v/tinymce-plugin-codeblock.svg
+[npm-url]: https://npmjs.org/package/tinymce-plugin-codeblock
 
 Welcome stranger! This is a repo containing the codeblock TinyMCE plugin.
 
