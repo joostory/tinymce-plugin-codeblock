@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const pluginName = 'codeblock'
 
-module.exports = {
+const config = {
   entry: {
     'plugin': './src/index.js',
     'plugin.min': './src/index.js'
@@ -29,10 +29,20 @@ module.exports = {
       ]
     }]
   },
-  plugins: process.env.NODE_ENV !== "production" ? [] : [
-    new CopyWebpackPlugin([{
-      from: path.join(__dirname, './LICENSE'),
-      to: path.join(__dirname, './dist', pluginName)
-    }])
-  ]
+  plugins: []
+}
+
+
+module.exports = (env, argv) => {
+
+  if (argv.mode === 'production') {
+    config.plugins.push(
+      new CopyWebpackPlugin([{
+        from: path.join(__dirname, './LICENSE'),
+        to: path.join(__dirname, './dist', pluginName)
+      }])
+    )
+  }
+
+  return config
 }
