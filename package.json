@@ -1,6 +1,6 @@
 {
   "name": "tinymce-plugin-codeblock",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "CodeBlock TinyMCE plugin",
   "main": "dist/codeblock/plugin.js",
   "module": "lib/index.js",
