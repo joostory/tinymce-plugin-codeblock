@@ -5,15 +5,13 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const pluginName = 'codeblock'
 
 module.exports = {
-  entry: process.env.NODE_ENV !== "production" ? {
-    'bundle': './src/index.js'
-  } : {
+  entry: {
     'plugin': './src/index.js',
     'plugin.min': './src/index.js'
   },
-  output: process.env.NODE_ENV !== "production" ? {
-    publicPath: '/'
-  } : {
+
+  output: {
+    publicPath: '/',
     path: path.join(__dirname, './dist', pluginName),
     filename: '[name].js'
   },
@@ -32,17 +30,9 @@ module.exports = {
     }]
   },
   plugins: process.env.NODE_ENV !== "production" ? [] : [
-    new webpack.optimize.UglifyJsPlugin({
-      include: /\.min\.js$/,
-      minimize: true
-    }),
     new CopyWebpackPlugin([{
       from: path.join(__dirname, './LICENSE'),
       to: path.join(__dirname, './dist', pluginName)
     }])
-  ],
-  externals: {
-    'highlightjs': '(typeof hljs !== "undefined")? hljs:{}',
-    'codemirror/lib/codemirror': '(typeof CodeMirror !== "undefined")? CodeMirror:{}'
-  }
+  ]
 }
