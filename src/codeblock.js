@@ -16,11 +16,13 @@ export default (editor, pluginUrl) => {
   }
 
   editor.addCommand('codeblock', handleButtonClick)
-  editor.addButton('codeblock', {
-    cmd: 'codeblock',
+  editor.ui.registry.addButton('codeblock', {
     icon: 'codesample',
     tooltip: '코드블럭',
-    stateSelector: 'pre'
+    stateSelector: 'pre',
+    onAction: () => {
+      editor.execCommand('codeblock')
+    }
   })
 
   editor.on('PreProcess', (e) => {

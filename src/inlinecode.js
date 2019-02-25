@@ -6,11 +6,13 @@ export default (editor, pluginUrl) => {
   }
 
   editor.addCommand('inlinecode', handleButtonClick)
-  editor.addButton('inlinecode', {
-    cmd: 'inlinecode',
+  editor.ui.registry.addButton('inlinecode', {
     icon: 'code',
     tooltip: 'Code',
-    stateSelector: 'code'
+    stateSelector: 'code',
+    onAction: () => {
+      editor.execCommand('inlinecode')
+    }
   })
 
 }
