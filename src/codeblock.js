@@ -17,7 +17,7 @@ export default (editor, pluginUrl) => {
 
   editor.addCommand('codeblock', handleButtonClick)
   editor.ui.registry.addButton('codeblock', {
-    icon: 'codesample',
+    icon: 'code-sample',
     tooltip: '코드블럭',
     stateSelector: 'pre',
     onAction: () => {
