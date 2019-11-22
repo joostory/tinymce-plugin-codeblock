@@ -1,5 +1,5 @@
 import CodeEditorDialog from './components/CodeEditorDialog'
-import highlightjs from 'highlightjs'
+import highlightjs from 'highlight.js'
 
 import './styles/codeblock.css'
 
