@@ -40,7 +40,7 @@
     "lodash": "^4.17.15"
   },
   "peerDependencies": {
-    "tinymce": ">= 4.0",
+    "tinymce": ">= 5.0",
     "codemirror": ">= 5.0",
     "highlight.js": ">= 9.0",
     "css-loader": ">= 1.0"
