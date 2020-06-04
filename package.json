@@ -11,7 +11,7 @@
     "build:plugin": "webpack --mode production",
     "build:es": "babel src --out-dir lib && cp -R src/styles lib",
     "build": "npm run build:plugin && npm run build:es",
-    "prepublish": "npm run clean && npm run build"
+    "prepublishOnly": "npm run clean && npm run build"
   },
   "author": "",
   "devDependencies": {
