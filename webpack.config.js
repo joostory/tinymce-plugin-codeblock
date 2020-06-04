@@ -29,7 +29,12 @@ const config = {
       ]
     }]
   },
-  plugins: []
+  plugins: [],
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  }
 }
 
 
@@ -37,10 +42,14 @@ module.exports = (env, argv) => {
 
   if (argv.mode === 'production') {
     config.plugins.push(
-      new CopyWebpackPlugin([{
-        from: path.join(__dirname, './LICENSE'),
-        to: path.join(__dirname, './dist', pluginName)
-      }])
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: path.join(__dirname, './LICENSE'),
+            to: path.join(__dirname, './dist', pluginName)
+          }
+        ]
+      })
     )
   }
 
