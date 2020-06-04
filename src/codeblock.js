@@ -31,10 +31,12 @@ export default (editor, pluginUrl) => {
         return
       }
       let $elm = $(elm), code = elm.textContent
-
+      let language = $elm.attr('data-language')
+      $elm.removeAttr('data-language')
       $elm.removeAttr('contentEditable')
 
-      $elm.empty().removeAttr('class').append($('<code></code>').each((idx, elm) => {
+      let codeClass = language? ` class="${language}"` : ''
+      $elm.empty().removeAttr('class').append($(`<code${codeClass}></code>`).each((idx, elm) => {
         elm.textContent = code
       }))
     })
@@ -48,15 +50,23 @@ export default (editor, pluginUrl) => {
     if (unprocessedCodeSamples.length) {
       editor.undoManager.transact(() => {
         unprocessedCodeSamples.each((idx, elm) => {
-          $(elm).find('br').each((idx, elm) => {
-            elm.parentNode.replaceChild(editor.getDoc().createTextNode('\n'), elm)
+          const $elm = $(elm)
+          $elm.find('br').each((idx, br) => {
+            br.parentNode.replaceChild(editor.getDoc().createTextNode('\n'), br)
           })
 
-          elm.contentEditable = false
-          elm.innerHTML = editor.dom.encode(elm.textContent)
-          if (highlightjs && highlightjs.highlightBlock) {
+          let codes = $elm.find("code[class]")
+          if (codes.length > 0) {
+            codes.each((idx, code) => {
+              if (code.getAttribute('class')) {
+                $elm.attr('data-language', code.getAttribute('class'))
+              }
+              highlightjs.highlightBlock(code)
+            })
+          } else {
             highlightjs.highlightBlock(elm)
           }
+          $elm.attr('contentEditable', false)
         })
       })
     }
