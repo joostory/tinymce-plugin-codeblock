@@ -8,14 +8,11 @@ const isCodeBlock = (node) => node && node.nodeName == 'PRE'
 export default (editor, pluginUrl) => {
 
   const $ = editor.$
-
-  let dialog = new CodeEditorDialog(editor)
+  const dialog = new CodeEditorDialog(editor)
   
-  const handleButtonClick = () => {
+  editor.addCommand('codeblock', () => {
     dialog.open()
-  }
-
-  editor.addCommand('codeblock', handleButtonClick)
+  })
   editor.ui.registry.addButton('codeblock', {
     icon: 'code-sample',
     tooltip: '코드블럭',
