@@ -1,9 +1,4 @@
 import CodeMirror from 'codemirror/lib/codemirror'
-import "codemirror/lib/codemirror.css"
-import "codemirror/addon/dialog/dialog.css"
-import "codemirror/mode/javascript/javascript"
-import "codemirror/mode/xml/xml"
-import "codemirror/mode/markdown/markdown"
 import highlightjs from 'highlight.js'
 
 function adjustLanguage(lang) {
