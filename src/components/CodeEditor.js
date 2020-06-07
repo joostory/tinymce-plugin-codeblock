@@ -2,7 +2,11 @@ import CodeMirror from 'codemirror/lib/codemirror'
 import highlightjs from 'highlight.js'
 
 function adjustLanguage(lang) {
-  return lang.replace('lang-', '').replace('language-', '')
+  if (lang) {
+    return lang.replace('lang-', '').replace('language-', '')
+  } else {
+    return ''
+  }
 }
 
 class CodeEditor {
@@ -20,14 +24,14 @@ class CodeEditor {
   init() {
     const { $, dom, settings } = this.tinymceEditor
     let theme = 'default'
-    let langs = []
+    this.langs = []
     if (settings.codeblock) {
       if (settings.codeblock.codeTheme) {
         theme = settings.codeblock.codeTheme
       }
 
       if (settings.codeblock.langs) {
-        langs = langs
+        this.langs = settings.codeblock.langs
       }
     }
 
@@ -40,7 +44,7 @@ class CodeEditor {
     }
 
     if (this.languageSelect) {
-      settings.codeblock.langs.forEach((item, index) => {
+      this.langs.forEach((item) => {
         dom.add(this.languageSelect, 'option', { value: item.value }, item.label)
       })
 
@@ -62,16 +66,29 @@ class CodeEditor {
       this.textarea.focus()
     }
 
-    this.setLanguage(currentCode.language)
+    this.setLanguage(adjustLanguage(currentCode.language))
   }
 
   setLanguage(language) {
-    this.language = language
-    if (this.codeMirror && language) {
-      this.codeMirror.setOption('mode', language)
-    }
-    if (this.languageSelect) {
-      this.languageSelect.value = language
+    const codeblockLanguage = this.langs.find(item => item.value == language)
+
+    if (!codeblockLanguage) {
+      if (this.codeMirror) {
+        this.codeMirror.setOption('mode', 'text')
+      }
+  
+      if (this.languageSelect) {
+        this.languageSelect.selectedIndex = 0
+      }  
+    } else {
+      this.language = codeblockLanguage.value
+      if (this.codeMirror) {
+        this.codeMirror.setOption('mode', codeblockLanguage.mode)
+      }
+  
+      if (this.languageSelect) {
+        this.languageSelect.value = codeblockLanguage.value
+      }
     }
   }
 
