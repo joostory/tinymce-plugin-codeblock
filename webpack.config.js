@@ -51,6 +51,10 @@ module.exports = (env, argv) => {
         ]
       })
     )
+    config.mode = 'production'
+  } else {
+    config.optimization = {}
+    config.mode = 'development'
   }
 
   return config
