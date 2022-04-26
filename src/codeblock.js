@@ -58,10 +58,10 @@ export default (editor, pluginUrl) => {
               if (code.getAttribute('class')) {
                 $elm.attr('data-language', code.getAttribute('class'))
               }
-              highlightjs.highlightBlock(code)
+              highlightjs.highlightElement(code)
             })
           } else {
-            highlightjs.highlightBlock(elm)
+            highlightjs.highlightElement(elm)
           }
           $elm.attr('contentEditable', false)
         })
