@@ -5,7 +5,7 @@ class CodeEditorDialog {
   constructor(editor) {
     this.editor = editor
     this.active = false
-    this.$container = null
+    this.container = null
     this.codeEditor = null
   }
 
@@ -14,13 +14,14 @@ class CodeEditorDialog {
       return
     }
 
-    if (!this.$container) {
+    if (!this.container) {
       this.createContainer()
     }
 
-    this.$container.show()
-    this.$container.offset()
-    this.$container.addClass('mce-in')
+    const dom = this.editor.dom
+    dom.show(this.container)
+    dom.getPos(this.container)
+    dom.addClass(this.container, 'mce-in')
     this.codeEditor.refresh()
     this.active = true
   }
@@ -30,9 +31,10 @@ class CodeEditorDialog {
       return
     }
 
-    this.$container.removeClass('mce-in')
-    this.$container.offset()
-    this.$container.hide()
+    const dom = this.editor.dom
+    dom.removeClass(this.container, 'mce-in')
+    dom.getPos(this.container)
+    dom.hide(this.container)
     
     this.active = false
   }
@@ -43,7 +45,7 @@ class CodeEditorDialog {
   }
 
   createContainer() {
-    const { $, dom } = this.editor
+    const { dom } = this.editor
     let container = dom.add(document.body, 'div', { class: 'mce-codeblock-dialog-container' })
     let shadow = dom.add(container, 'div', { class: 'mce-codeblock-shadow' })
     let dialog = dom.add(container, 'div', { class: 'mce-codeblock-dialog' })
@@ -55,18 +57,16 @@ class CodeEditorDialog {
     let btnCancel = dom.add(footer, 'button', { class: 'mce-codeblock-btn mce-codeblock-btn-cancel' }, '취소')
     let btnSubmit = dom.add(footer, 'button', { class: 'mce-codeblock-btn mce-codeblock-btn-submit', disabled:true }, '확인')
 
-    this.$container = $(container)
-    let $btnSubmit = $(btnSubmit)
-    
+    this.container = container
     this.createEditor(textarea, languageSelect, (value) => {
       if (value && value.length > 0) {
-        $btnSubmit.attr('disabled', null)
+        dom.setAttrib(btnSubmit, 'disabled', null)
       } else {
-        $btnSubmit.attr('disabled', true)
+        dom.setAttrib(btnSubmit, 'disabled', true)
       }
     })
 
-    $btnSubmit.on('click', () => {
+    dom.bind(btnSubmit, 'click', () => {
       if (!this.active) {
         return
       }
@@ -74,8 +74,8 @@ class CodeEditorDialog {
       this.close()
     })
 
-    $(btnCancel).on('click', this.handleClose)
-    $(shadow).on('click', this.handleClose)
+    dom.bind(btnCancel, 'click', this.handleClose)
+    dom.bind(shadow, 'click', this.handleClose)
   }
 
   createEditor(textarea, languageSelect, onChange) {

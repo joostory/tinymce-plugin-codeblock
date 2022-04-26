@@ -22,18 +22,10 @@ class CodeEditor {
   }
 
   init() {
-    const { $, dom, settings } = this.tinymceEditor
-    let theme = 'default'
-    this.langs = []
-    if (settings.codeblock) {
-      if (settings.codeblock.codeTheme) {
-        theme = settings.codeblock.codeTheme
-      }
+    const { dom, options } = this.tinymceEditor
+    let theme = options.get("codeTheme")
+    this.langs = options.get("langs")
 
-      if (settings.codeblock.langs) {
-        this.langs = settings.codeblock.langs
-      }
-    }
 
     if (this.textarea && CodeMirror && CodeMirror.fromTextArea) {
       this.codeMirror = CodeMirror.fromTextArea(this.textarea, {
@@ -48,7 +40,8 @@ class CodeEditor {
         dom.add(this.languageSelect, 'option', { value: item.value }, item.label)
       })
 
-      $(this.languageSelect).on('change', e => {
+      
+      dom.bind(this.languageSelect, 'change', e => {
         this.setLanguage(e.target.value)
       })
     }
@@ -97,8 +90,9 @@ class CodeEditor {
     let code = this.getValue()
 
     editor.undoManager.transact(() => {
+      const dom = editor.dom
       let node = this.getSelectedCodeBlock()
-      code = editor.dom.encode(code)
+      code = dom.encode(code)
       code = this.language? `<code class='${this.language}'>${code}</code>` : `<code>${code}</code>`
 
       if (node) {
@@ -108,11 +102,12 @@ class CodeEditor {
         editor.selection.select(node)
       } else {
         editor.insertContent(`<pre id="__new">${code}</pre>`)
-        node = editor.$('#__new').removeAttr('id')[0]
+        node = dom.select('#__new')[0]
+        dom.setAttrib(node, 'id', null)
         editor.selection.select(node)
       }
 
-      highlightjs.highlightBlock(editor.$(node).find('code')[0])
+      highlightjs.highlightElement(dom.select('code', node)[0])
     })
   }
 

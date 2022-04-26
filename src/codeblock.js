@@ -7,8 +7,25 @@ const isCodeBlock = (node) => node && node.nodeName == 'PRE'
 
 export default (editor, pluginUrl) => {
 
-  const $ = editor.$
   const dialog = new CodeEditorDialog(editor)
+
+  const registerOption = editor.options.register
+  registerOption('highlightStyle', {
+    processor: 'string',
+    default: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css'
+  });
+  registerOption('codeTheme', {
+    processor: 'string',
+    default: 'default'
+  })
+  registerOption('langs', {
+    processor: 'object[]',
+    default: [
+      { value: 'javascript', mode:'javascript', label: 'Javascript' },
+      { value: 'html', mode:'xml', label: 'HTML' },
+      { value: 'java', mode:'clike', label: 'Java' }
+    ]
+  })
   
   editor.addCommand('codeblock', () => {
     dialog.open()
@@ -23,57 +40,59 @@ export default (editor, pluginUrl) => {
   })
 
   editor.on('PreProcess', (e) => {
-    $('pre[contenteditable=false]', e.node).each((idx, elm) => {
+    const dom = editor.dom
+    dom.select('pre[contenteditable=false]', e.node).forEach((elm) => {
       if (!isCodeBlock(elm)) {
         return
       }
-      let $elm = $(elm), code = elm.textContent
-      let language = $elm.attr('data-language')
-      $elm.removeAttr('data-language')
-      $elm.removeAttr('contentEditable')
+      let code = elm.textContent
+      let language = dom.getAttrib(elm, 'data-language')
+      dom.setAttrib(elm, 'data-language', undefined)
+      dom.setAttrib(elm, 'contentEditable', undefined)
 
       let codeClass = language? ` class="${language}"` : ''
-      $elm.empty().removeAttr('class').append($(`<code${codeClass}></code>`).each((idx, elm) => {
-        elm.textContent = code
-      }))
+      dom.setHTML(elm, "")
+      dom.setAttrib(elm, "class", undefined)
+      dom.setHTML(elm, `<code${codeClass}>${code}</code>`)
     })
   })
 
   editor.on('SetContent', () => {
-    let unprocessedCodeSamples = $('pre')
-      .filter((idx, elm) => isCodeBlock(elm))
-      .filter((idx, elm) => elm.contentEditable !== "false")
+    const dom = editor.dom
+    let unprocessedCodeSamples = dom.select('pre')
+      .filter((elm) => isCodeBlock(elm))
+      .filter((elm) => elm.contentEditable !== "false")
 
     if (unprocessedCodeSamples.length) {
       editor.undoManager.transact(() => {
-        unprocessedCodeSamples.each((idx, elm) => {
-          const $elm = $(elm)
-          $elm.find('br').each((idx, br) => {
+        unprocessedCodeSamples.forEach((elm, idx) => {
+          dom.select('br', elm).forEach((br) => {
             br.parentNode.replaceChild(editor.getDoc().createTextNode('\n'), br)
           })
 
-          let codes = $elm.find("code[class]")
+          let codes = dom.select("code[class]", elm)
           if (codes.length > 0) {
-            codes.each((idx, code) => {
-              if (code.getAttribute('class')) {
-                $elm.attr('data-language', code.getAttribute('class'))
+            codes.forEach((code) => {
+              if (dom.getAttrib(code, 'class')) {
+                dom.setAttrib(elm, 'data-language', dom.getAttrib(code, 'class'))
               }
               highlightjs.highlightElement(code)
             })
           } else {
             highlightjs.highlightElement(elm)
           }
-          $elm.attr('contentEditable', false)
+          dom.setAttrib(elm, 'contentEditable', false)
         })
       })
     }
   })
 
   editor.on('init', () => {
-    if (editor.settings.codeblock && editor.settings.codeblock.highlightStyle) {
+    const highlightStyle = editor.options.get("highlightStyle")
+    if (highlightStyle) {
       let linkElm = editor.dom.create('link', {
         rel: 'stylesheet',
-        href: editor.settings.codeblock.highlightStyle
+        href: highlightStyle
       })
 
       editor.getDoc().getElementsByTagName('head')[0].appendChild(linkElm)

@@ -32,7 +32,7 @@
     "highlight.js": "^11.5.1",
     "html-webpack-plugin": "^5.3.1",
     "style-loader": "^3.3.1",
-    "tinymce": "^5.6.2",
+    "tinymce": "^6.0.1",
     "webpack": "^5.11.0",
     "webpack-cli": "^4.3.0",
     "webpack-dev-middleware": "^5.0.0"
