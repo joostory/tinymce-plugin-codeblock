@@ -2,6 +2,7 @@ import CodeEditorDialog from './components/CodeEditorDialog'
 import highlightjs from 'highlight.js'
 
 import './styles/codeblock.css'
+import { getOption, registerOptions } from './options'
 
 const isCodeBlock = (node) => node && node.nodeName == 'PRE'
 
@@ -9,23 +10,7 @@ export default (editor, pluginUrl) => {
 
   const dialog = new CodeEditorDialog(editor)
 
-  const registerOption = editor.options.register
-  registerOption('highlightStyle', {
-    processor: 'string',
-    default: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css'
-  });
-  registerOption('codeTheme', {
-    processor: 'string',
-    default: 'default'
-  })
-  registerOption('langs', {
-    processor: 'object[]',
-    default: [
-      { value: 'javascript', mode:'javascript', label: 'Javascript' },
-      { value: 'html', mode:'xml', label: 'HTML' },
-      { value: 'java', mode:'clike', label: 'Java' }
-    ]
-  })
+  registerOptions(editor)
   
   editor.addCommand('codeblock', () => {
     dialog.open()
@@ -88,7 +73,7 @@ export default (editor, pluginUrl) => {
   })
 
   editor.on('init', () => {
-    const highlightStyle = editor.options.get("highlightStyle")
+    const highlightStyle = getOption(editor, "highlightStyle")
     if (highlightStyle) {
       let linkElm = editor.dom.create('link', {
         rel: 'stylesheet',

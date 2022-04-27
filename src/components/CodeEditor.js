@@ -1,5 +1,6 @@
 import CodeMirror from 'codemirror/lib/codemirror'
 import highlightjs from 'highlight.js'
+import { getOption } from '../options'
 
 function adjustLanguage(lang) {
   if (lang) {
@@ -22,9 +23,9 @@ class CodeEditor {
   }
 
   init() {
-    const { dom, options } = this.tinymceEditor
-    let theme = options.get("codeTheme")
-    this.langs = options.get("langs")
+    const { dom } = this.tinymceEditor
+    let theme = getOption(this.tinymceEditor, "codeTheme")
+    this.langs = getOption(this.tinymceEditor, "langs")
 
 
     if (this.textarea && CodeMirror && CodeMirror.fromTextArea) {

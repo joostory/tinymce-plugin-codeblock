@@ -34,3 +34,11 @@ tinymce.init({
 
 - highlightStyle: optional, [highlight.js](https://highlightjs.org) style url
 - codeTheme: optional, default value - 'default'
+- langs: optional, default value -
+```
+[
+  { value: 'javascript', mode:'javascript', label: 'Javascript' },
+  { value: 'html', mode:'xml', label: 'HTML' },
+  { value: 'java', mode:'clike', label: 'Java' }
+]
+```
